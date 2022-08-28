@@ -1,10 +1,10 @@
 package exercicios;
 
-public class Quiz {
+public class QuizProduto {
     private final String pergunta;
-    private final int resposta;
+    private final String resposta;
 
-    public Quiz(String pergunta, int resposta){
+    public QuizProduto(String pergunta, String resposta){
         this.pergunta = pergunta;
         this.resposta = resposta;
     }
@@ -13,7 +13,7 @@ public class Quiz {
         return pergunta;
     }
 
-    public int getResposta() {
+    public String getResposta() {
         return resposta;
     }
 }

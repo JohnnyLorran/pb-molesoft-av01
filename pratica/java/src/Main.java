@@ -14,82 +14,71 @@ public class Main {
         ex09();
         System.out.println("\n----------------- Exercicio 10 ----------------\n");
         ex10();
+        //Bônus de um Quiz de SOMA e SUBTRAÇÂO!
+        System.out.println("\n----------------- Bonus 11 ----------------\n");
+        ex11();
 
     }
 
     public static void ex08(){
-        ArrayList<Quiz> quiz = new ArrayList<>();
-        Random random = new Random();
-        int acertos = 0;
+        ArrayList<QuizProduto> quizProduto = new ArrayList<>();
 
-        //Recebe o nome do jogador
-        System.out.print("Digite o nome do jogador: ");
+        QuizProduto q = new QuizProduto("\n\nNossos produtos são todos originais de fábrica?","sim");
+        quizProduto.add(q);
+        QuizProduto p = new QuizProduto("\n\nNossos produtos possuem garantia?","sim");
+        quizProduto.add(p);
+        QuizProduto k = new QuizProduto("\n\nA garantia dos nossos produtos é de 180 dias após a entrega?","nao");
+        quizProduto.add(k);
+        QuizProduto g = new QuizProduto("\n\nNossos produtos possuem a melhor qualidade do mercado?","sim");
+        quizProduto.add(g);
+        QuizProduto l = new QuizProduto("\n\nÉ verdade que nossos produtos não são seguros?","nao");
+        quizProduto.add(l);
+        QuizProduto w = new QuizProduto("\n\nA linha de produtos HighQuality foi lançada em 2022?","nao");
+        quizProduto.add(w);
+        QuizProduto d = new QuizProduto("\n\nÉ verdade que a garantia é de 1 ano para qualquer produto?","sim");
+        quizProduto.add(d);
+        QuizProduto t = new QuizProduto("\n\nTemos frete gratuito para todo Brasil?","sim");
+        quizProduto.add(t);
+        QuizProduto m = new QuizProduto("\n\nÈ verdade que todo mês tem promoção de produtos diversos?","sim");
+        quizProduto.add(m);
+        QuizProduto f = new QuizProduto("\n\nO frete gratuito é acim de R$ 200,00 em produtos? ","nao");
+        quizProduto.add(f);
+
+        System.out.println("Jogue o nosso Quiz para ganhar um voucher da nossa loja !\n");
+        System.out.println("Responda com "+ConsoleColors.GREEN+"'SIM'"+ConsoleColors.WHITE+" ou "+ConsoleColors.RED+"'NAO'"+ConsoleColors.WHITE+ " as perguntas, números não são aceitos como resposta !!");
+        System.out.print("\nPara iniciar o Quiz, digite seu nome: ");
         String nome = inputString();
-
-        //Cria o jogo de forma aleatoria toda vez que o código é inicializado
-        //O jogo pode ter de 1 a 11 perguntas
-        //As  perguntas e respostas são geradas automaticamente
-        int numero = random.nextInt(10) +1 ;
-        if( numero == 1){
-            System.out.println("\nO Quiz terá " + ConsoleColors.BLUE + numero +  ConsoleColors.WHITE + " pergunta.");
-        }else{
-            System.out.println("\nO Quiz terá " + ConsoleColors.BLUE + numero + ConsoleColors.WHITE + " perguntas.");
-        }
-
-        for(int i = 1; i <= numero; i++){
-            int n1 = random.nextInt(100) +1;
-            int n2 = random.nextInt(100) +1;
-            String pergunta;
-            int resultado ;
-            if(i % 2 == 0){
-                pergunta = "Qual o valor da soma entre " + n1 + " e " + n2 + " ?";
-                resultado =  n1 + n2;
-            }else{
-                 pergunta = "Qual o valor da subtração entre " + n1 + " e " + n2 + " ?";
-                 resultado = n1 - n2;
-            }
-
-            Quiz q = new Quiz(pergunta,resultado);
-            quiz.add(q);
-        }
-
-        //Exibe a pergunta, pega a resposta e verifica se acertou ou errou
-        int k = 1;
-        for (Quiz p: quiz) {
-            System.out.println("\n"+k + "° Pergunta: " + p.getPergunta());
-
-            int resposta;
+        String resposta;
+        int acertos = 0;
+        for (QuizProduto a: quizProduto) {
             do {
+                System.out.println(a.getPergunta());
                 System.out.print("Resposta: ");
-                resposta = inputNumberInt();
-                if(resposta == -999){
-                    System.out.println(ConsoleColors.RED +"\nAs respostas devem ser números inteiros, positivos ou negativos !\n\n" + ConsoleColors.WHITE);
-                    System.out.println("\nTente responder novamente.");
-                }
-            } while (resposta == -999 );
+                resposta = inputString().toLowerCase(Locale.ROOT);
 
-            if(resposta == p.getResposta()){
-                System.out.print(ConsoleColors.GREEN + "\nMuito bem, você acertou!\n\n" + ConsoleColors.WHITE);
-                acertos++;
-            }else{
-                System.out.print(ConsoleColors.RED + "\nQue pena, você errou.\n\n" + ConsoleColors.WHITE);
-            }
-            k++;
+                if(resposta.equals("não")){
+                    resposta = "nao";
+                }
+
+                if(a.getResposta().equals(resposta)){
+                    acertos++;
+                }
+
+                if(!resposta.equals("sim") && !resposta.equals("nao") ){
+                    System.out.println(ConsoleColors.RED + "Resposta inválida, tente novamente !" + ConsoleColors.WHITE);
+                }
+            }while (!resposta.equals("sim") && !resposta.equals("nao"));
         }
 
-        System.out.println("\n\nJogo Finalizado, resultado:\n");
+        System.out.println("\n\nQuiz Finalizado, resultado:\n");
         System.out.println("Jogador: " + nome);
         System.out.println(ConsoleColors.GREEN + "Acertos: " + ConsoleColors.WHITE + acertos);
-        System.out.println(ConsoleColors.RED + "Erros: " + ConsoleColors.WHITE+ (numero - acertos));
-        if(numero - acertos == 0){
-            System.out.println( ConsoleColors.GREEN +"\nPARABÉNS, VOCÊ ACERTOU TODAS AS PERGUNTAS !! " + ConsoleColors.WHITE);
-        }
-
-        if(acertos == 0){
-            System.out.println( ConsoleColors.RED +"\nVOCÊ ERROU TODAS AS PERGUNTAS, PROCURE SE ESFORÇAR MAIS." + ConsoleColors.WHITE);
-        }
+        System.out.println(ConsoleColors.RED + "Erros: " + ConsoleColors.WHITE+ ((quizProduto.size()) - acertos));
 
     }
+
+
+
     public static void ex09(){
         ArrayList<Usuario> usuarios = new ArrayList<>();
         Map<Integer,String> mensagens = new HashMap<>();
@@ -181,7 +170,7 @@ public class Main {
         //E exibimos os dados conforme solicitados
         System.out.println("\nResultado do calculo do bônus:\n");
         for (Funcionario j: funcionarios) {
-            System.out.println("Funcionário " + j.getNome() );
+            System.out.println("Funcionário: " + j.getNome() );
             System.out.println("Salário: " + ConsoleColors.GREEN + realFormat.format(j.getSalario()) + ConsoleColors.WHITE );
 
             if(j.getBonus().doubleValue() > 0){
@@ -191,6 +180,82 @@ public class Main {
             }
             System.out.println("Salário Liquido: " + ConsoleColors.GREEN + realFormat.format(j.getSalarioLiquido()) +"\n" + ConsoleColors.WHITE);
         }
+    }
+
+    //Bônus: esse código é um quiz de perguntas de Soma e Subtração
+    //Gerado aleatoriamente pelo próprio codigo.
+    public static void ex11(){
+        ArrayList<Quiz> quiz = new ArrayList<>();
+        Random random = new Random();
+        int acertos = 0;
+
+        //Recebe o nome do jogador
+        System.out.print("Digite o nome do jogador: ");
+        String nome = inputString();
+
+        //Cria o jogo de forma aleatoria toda vez que o código é inicializado
+        //O jogo pode ter de 1 a 11 perguntas
+        //As  perguntas e respostas são geradas automaticamente
+        int numero = random.nextInt(10) +1 ;
+        if( numero == 1){
+            System.out.println("\nO Quiz terá " + ConsoleColors.BLUE + numero +  ConsoleColors.WHITE + " pergunta.");
+        }else{
+            System.out.println("\nO Quiz terá " + ConsoleColors.BLUE + numero + ConsoleColors.WHITE + " perguntas.");
+        }
+
+        for(int i = 1; i <= numero; i++){
+            int n1 = random.nextInt(100) +1;
+            int n2 = random.nextInt(100) +1;
+            String pergunta;
+            int resultado ;
+            if(i % 2 == 0){
+                pergunta = "Qual o valor da soma entre " + n1 + " e " + n2 + " ?";
+                resultado =  n1 + n2;
+            }else{
+                pergunta = "Qual o valor da subtração entre " + n1 + " e " + n2 + " ?";
+                resultado = n1 - n2;
+            }
+
+            Quiz q = new Quiz(pergunta,resultado);
+            quiz.add(q);
+        }
+
+        //Exibe a pergunta, pega a resposta e verifica se acertou ou errou
+        int k = 1;
+        for (Quiz p: quiz) {
+            System.out.println("\n"+k + "° Pergunta: " + p.getPergunta());
+
+            int resposta;
+            do {
+                System.out.print("Resposta: ");
+                resposta = inputNumberInt();
+                if(resposta == -999){
+                    System.out.println(ConsoleColors.RED +"\nAs respostas devem ser números inteiros, positivos ou negativos !\n\n" + ConsoleColors.WHITE);
+                    System.out.println("\nTente responder novamente.");
+                }
+            } while (resposta == -999 );
+
+            if(resposta == p.getResposta()){
+                System.out.print(ConsoleColors.GREEN + "\nMuito bem, você acertou!\n\n" + ConsoleColors.WHITE);
+                acertos++;
+            }else{
+                System.out.print(ConsoleColors.RED + "\nQue pena, você errou.\n\n" + ConsoleColors.WHITE);
+            }
+            k++;
+        }
+
+        System.out.println("\n\nJogo Finalizado, resultado:\n");
+        System.out.println("Jogador: " + nome);
+        System.out.println(ConsoleColors.GREEN + "Acertos: " + ConsoleColors.WHITE + acertos);
+        System.out.println(ConsoleColors.RED + "Erros: " + ConsoleColors.WHITE+ (numero - acertos));
+        if(numero - acertos == 0){
+            System.out.println( ConsoleColors.GREEN +"\nPARABÉNS, VOCÊ ACERTOU TODAS AS PERGUNTAS !! " + ConsoleColors.WHITE);
+        }
+
+        if(acertos == 0){
+            System.out.println( ConsoleColors.RED +"\nVOCÊ ERROU TODAS AS PERGUNTAS, PROCURE SE ESFORÇAR MAIS." + ConsoleColors.WHITE);
+        }
+
     }
 
 
