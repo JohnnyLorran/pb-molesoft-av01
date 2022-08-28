@@ -60,12 +60,16 @@ public class Main {
                     resposta = "nao";
                 }
 
-                if(a.getResposta().equals(resposta)){
-                    acertos++;
-                }
 
                 if(!resposta.equals("sim") && !resposta.equals("nao") ){
                     System.out.println(ConsoleColors.RED + "Resposta inválida, tente novamente !" + ConsoleColors.WHITE);
+                }else{
+                    if(a.getResposta().equals(resposta)){
+                        acertos++;
+                        System.out.println(ConsoleColors.GREEN + "Muito bem, você acertou !" + ConsoleColors.WHITE);
+                    }else{
+                        System.out.println(ConsoleColors.RED + "Que pena, você errou." + ConsoleColors.WHITE);
+                    }
                 }
             }while (!resposta.equals("sim") && !resposta.equals("nao"));
         }
