@@ -1,0 +1,30 @@
+Pergunta 1:
+R: O primeiro pilar é a transparência que se aplica a todos os envolvidos para que todos tenham uma visão clara sobre 
+todo o processo, é bastante importante para que não haja decisões equivocadas, assim, diminuindo o risco das ações.
+O segundo pilar é a inspeção, que se aplica em todo o processo do scrum, fazendo com que ele seja inspecionando constantemente
+para identificar possíveis problemas que podem aparecer durante o processo do scrum, afim de corrigi-los em tempo hábil,
+para que o produto seja entregue conforme combinado.
+O terceiro pilar é a adaptação,  conforme o scrum é inspecionado, pode ser que tenhamos que realizar ajustes e/ou correções
+que devem ser realizados rapidamente e isso irá exigir um grande potencial de adaptação. 
+
+Pergunta 2:
+R:Faltou o usuário utilizar o comando "git add ."  que adiciona todos os arquivos alterados no commit,
+assim quando ele executar o push, enviará todos os arquivos alterados,no caso,apenas os dois arquivos.
+
+Pergunta 3:
+R: Devemos criar um arquivo com o nome ".gitignore" e adicionar o caminho desses itens. por exemplo: 
+	"/imagens" -> ignora tudo dentro da pasta imagens.
+	"index.html" -> ignora apenas este arquivo.
+	"componentes/header.tsx" -> ingora dentro de "componentes" apenas o arquivo header.tsx 
+
+Pergunta 4:
+R: O scrum possui uma forte liderança, que é o ScrumMaster, então de certa forma, ele é o responsável por guiar o resto do time até
+o objetivo, alguns amigos dizem que é o coach do squad, mas no meu ponto de vista, ele é a pessoa que tem que estar presente,
+auxiliando, analisando o time e cada individuo para ser capaz de fornecer "suporte" para a necessidade de cada um e da equipe em si.
+Além disso, a transparência  abre espaço para uma comunicação mais eficaz.Já na visão do cliente, acredito que a transparência é muito
+importante e poder acompanhar o que já está pronto, o que está sendo feito, o que falta e ainda ter a opção de realizar correções ou
+modificações caso haja a necessidade e a possibilidade de serem realizadas é um grande atrativo no meu ponto de vista.
+
+Pergunta 5: 
+R: PO é responsável por entender a necessidade do cliente, escrever estórias e passar para o Squad ou 
+Dev team o que precisa ser feito/desenvolvido!

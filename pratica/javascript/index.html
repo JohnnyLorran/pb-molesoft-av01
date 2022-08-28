@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Calcular moedinhas</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+    </head>
+    <body>
+            <input type="text" id="valor" name="valor" style="width:85px" placeholder=" Digite o valor "> 
+            <button type="button" onclick="calcula()">Calcular</button>
+
+        
+            <div class="visivel">
+                <h2 id="total">Total de moedas: 0</h2>
+                <h3 >Sendo:</h3>
+                <h3 id="m50">0 de 50 centavos</h3>
+                <h3 id="m25">0 de 25 centavos</h3>
+                <h3 id="m10">0 de 10 centavos</h3>
+                <h3 id="m05">0 de 5 centavos</h3>
+                <h3 id="m01">0 de 1 centavo</h3>
+            </div>
+        
+        <script async defer>    
+            function calcula(){
+
+                //Pega o valor do campo com id 'valor' e converte para Float
+                var valorInput = parseFloat(document.getElementById('valor').value)
+                var valores = [0.50, 0.25, 0.10, 0.05, 0.01];
+                var moedas =[0,0,0,0,0];
+
+                // Separamos a parte que sobra da divisão por 0.5
+                // e utilizamos a parte que sobra para tirar do valor digitado
+                // assim ficamos com o número exato que é dividido por 0.5 e o resto, um em cada variavel
+                // Exemplo 2.36 = valortotal será 2 e valorquebrado 0.36
+                var valorquebrado = valorInput % valores[0]
+                var valortotal = valorInput - valorquebrado
+                moedas[0] = valortotal / valores[0]
+                valortotal = valorquebrado
+                var totalmoedas = moedas[0]
+
+                //Aplicamos a mesma lógica de cima, sendo que o valortotal se torna o valorquebrado
+                //do resultado acima e não iremos utilizar o valor que foi digitado pelo usuario.
+                for(var i = 1; i <= valores.length-1; i++){
+                    valortotal = valorquebrado
+                    valorquebrado = (valortotal % valores[i]).toFixed(2)
+                  
+                        //quando o valor for igual 0.03 não é necessário fazer essa subtração
+                        if(valortotal != 0.03){
+                            valortotal = (valortotal - valorquebrado).toFixed(2)
+                        }
+
+                        //verifica se o valor a ser dividido é igual ou maior que a moeda
+                        if( valortotal >= valores[i]){
+                            moedas[i] = valortotal / valores[i]
+                            console.log(moedas[i])
+                            totalmoedas += moedas[i]
+                        }
+                }
+                
+                //Pegamos os elementos do html pelo ID
+                var total = document.getElementById('total')
+                var m50 = document.getElementById('m50')
+                var m25 = document.getElementById('m25')
+                var m10 = document.getElementById('m10')
+                var m05 = document.getElementById('m05')
+                var m01 = document.getElementById('m01')
+
+                //Escrevemos dentro dos elementos
+                total.innerText = "Total de moedas: " + totalmoedas
+                m50.innerText = moedas[0] + " de " + (valores[0] * 100) + " centavos"
+                m25.innerText = moedas[1] + " de " + (valores[1] * 100) + " centavos"
+                m10.innerText = moedas[2] + " de " + (valores[2] * 100) + " centavos"
+                m05.innerText = moedas[3] + " de " + (valores[3] * 100) + " centavos"
+                m01.innerText = moedas[4]+ " de " + (valores[4] * 100) + " centavo"
+
+                //Alteramos o display da div dos elementos, para que eles apareçam na tela
+                var mostra = document.querySelector(".visivel");
+                mostra.style.display = "inline";
+            }
+
+        
+
+        </script>
+        <style>
+            body{
+                background-color: rgb(241, 241, 241);
+                padding: 15px;
+            }
+
+            .visivel{
+                display: none;
+            }
+        </style>
+    </body>
+</html>
